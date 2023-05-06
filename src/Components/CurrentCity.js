@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import PrincipalInfo from './PrincipalInfo'
-import InfoCard from './InfoCard'
 import CardsList from './CardsList'
 import CityForm from './CityForm'
 
@@ -12,7 +11,7 @@ const firstLocation = {
 const apiKey = '19d7ca0814d26059779c57f55cb6432b'
 
 const CurrentCity = () => {
-   const [search, setSearch] = useState(false)
+   const [search, setSearch] = useState(null)
    const [location, setLocation] = useState(firstLocation)
    const [data, setData] = useState(null)
 
@@ -30,11 +29,13 @@ const CurrentCity = () => {
 
       const error = () => {
          console.log('error')
+         setData(null)
       }
 
-      if (!navigator.geolocation.getCurrentPosition(success, error)) {
+      if (!navigator.geolocation)
          console.log('your browser doesn´t support Geolocation')
-      }
+
+      navigator.geolocation.getCurrentPosition(success, error)
    }, [])
 
    useEffect(() => {
@@ -53,7 +54,20 @@ const CurrentCity = () => {
    }, [location])
 
    useEffect(() => {
-      console.log(search)
+      fetch(
+         `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=metric`
+      )
+         .then(res => res.json())
+         .then(data => {
+            if (data.cod === '404') {
+               return Promise.reject({
+                  status: 404,
+                  err: 'City not found',
+               })
+            }
+            setData(data)
+         })
+         .catch(err => console.log(err))
    }, [search])
 
    const changeSearch = city => setSearch(city)
