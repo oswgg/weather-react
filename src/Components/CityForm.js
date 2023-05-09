@@ -11,7 +11,7 @@ const CityForm = ({ changeSearch }) => {
    const handleOnChange = ({ target }) => setCity(target.value)
 
    return (
-      <>
+      <div className=''>
          <form onSubmit={handleOnSubmit}>
             <input
                type='text'
@@ -20,7 +20,7 @@ const CityForm = ({ changeSearch }) => {
             />
             <input type='submit' />
          </form>
-      </>
+      </div>
    )
 }
 

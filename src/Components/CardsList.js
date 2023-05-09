@@ -1,12 +1,29 @@
 import React from 'react'
 import InfoCard from './InfoCard'
 
-const options = { hour12: false, hour: '2-digit', minute: '2-digit' }
-
 const CardsList = ({ data }) => {
+   const {
+      sys: { sunrise, sunset },
+      timezone,
+   } = data
+
    const getTime = unix => {
-      const time = new Date(unix * 1000).toLocaleTimeString([], options)
-      return time
+      const date = new Date(unix * 1000)
+      const UTCTimezone = timezone / 3600
+
+      const hours =
+         date.getUTCHours() > 12
+            ? date.getUTCHours() + UTCTimezone
+            : date.getUTCHours() + UTCTimezone + 12
+
+      const localeHours = hours > 12 ? hours - 12 : hours
+
+      const minutes =
+         date.getUTCMinutes() < 10
+            ? `0${date.getUTCMinutes()}`
+            : date.getUTCMinutes()
+
+      return `${localeHours}:${minutes}`
    }
 
    const compareTemp = () => {
@@ -20,11 +37,11 @@ const CardsList = ({ data }) => {
    }
 
    return (
-      <div className='flex flex-wrap justify-center gap-2 mt-6'>
+      <div className='flex flex-wrap justify-center gap-2 mt-6 '>
          <InfoCard
             title='SUNRISE'
-            info={getTime(data.sys.sunrise)}
-            extraInfo={`Sunset: ${getTime(data.sys.sunset)}`}
+            info={getTime(sunrise)}
+            extraInfo={`Sunset: ${getTime(sunset)}`}
          />
          <InfoCard
             title='FEELS LIKE'
