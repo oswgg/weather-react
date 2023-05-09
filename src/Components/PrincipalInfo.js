@@ -1,3 +1,4 @@
+// Info
 const PrincipalInfo = ({ data }) => {
    return (
       <div className='w-3/4 h-[25vh] mx-auto text-center flex flex-col justify-center'>
@@ -18,6 +19,7 @@ const PrincipalInfo = ({ data }) => {
    )
 }
 
+// Skeleton load
 export const SketelonPrincipalInfo = () => {
    return (
       <>

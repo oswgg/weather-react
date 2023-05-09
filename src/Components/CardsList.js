@@ -7,25 +7,27 @@ const CardsList = ({ data }) => {
       timezone,
    } = data
 
+   // Get the real time of the city
    const getTime = unix => {
       const date = new Date(unix * 1000)
-      const UTCTimezone = timezone / 3600
+      const UTCTimezone = timezone / 3600 // Get differ of hours
 
       const hours =
          date.getUTCHours() > 12
-            ? date.getUTCHours() + UTCTimezone
+            ? date.getUTCHours() + UTCTimezone // If hour is minor than 12 then add 12 to not affect the real hour
             : date.getUTCHours() + UTCTimezone + 12
 
-      const localeHours = hours > 12 ? hours - 12 : hours
+      const localeHours = hours > 12 ? hours - 12 : hours // Transform to 12 hours
 
       const minutes =
          date.getUTCMinutes() < 10
-            ? `0${date.getUTCMinutes()}`
+            ? `0${date.getUTCMinutes()}` // If minutes are minor than 10 then add 0 to its left
             : date.getUTCMinutes()
 
       return `${localeHours}:${minutes}`
    }
 
+   // Is feels like warmer or colder than temp
    const compareTemp = () => {
       const {
          main: { temp, feels_like },

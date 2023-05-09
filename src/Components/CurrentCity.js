@@ -17,6 +17,7 @@ const CurrentCity = () => {
    const [loading, setLoading] = useState(false)
    const [data, setData] = useState(null)
 
+   // Use geolocation when app loads
    useEffect(() => {
       const success = position => {
          const {
@@ -40,24 +41,26 @@ const CurrentCity = () => {
       navigator.geolocation.getCurrentPosition(success, error)
    }, [])
 
+   // Load weather of the city where the user is
    useEffect(() => {
       const { latitude, longitude } = location
 
       if (!latitude || !longitude) return
-      setLoading(true)
+      setLoading(true) // skeleton load
       fetch(
          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
       )
          .then(res => res.json())
          .then(data => {
             setData(data)
-            setLoading(false)
+            setLoading(false) // skeleton load false
          })
    }, [location])
 
+   // searching for another city
    useEffect(() => {
       if (!search) return
-      setLoading(true)
+      setLoading(true) // skeleton load
       fetch(
          `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=metric`
       )
@@ -70,14 +73,15 @@ const CurrentCity = () => {
                })
             }
             setData(data)
-            setLoading(false)
+            setLoading(false) // skeleton load false
          })
-         .catch(err => console.log(err))
+         .catch(err => console.log(err)) // manage of error
    }, [search])
 
-   const changeSearch = city => setSearch(city || null)
+   const changeSearch = city => setSearch(city || null) //    Change the name of the city search
 
    return (
+      // if data and loading are are in common then show the info if not show skeleton load
       <>
          {data && !loading ? (
             <div className='w-11/12 mx-auto pt-12'>
