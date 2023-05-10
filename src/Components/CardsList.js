@@ -47,7 +47,7 @@ const CardsList = ({ data }) => {
          />
          <InfoCard
             title='FEELS LIKE'
-            info={Math.round(data.main.feels_like)}
+            info={`${Math.round(data.main.feels_like)}°`}
             extraInfo={compareTemp()}
          />
          <InfoCard

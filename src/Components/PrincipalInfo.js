@@ -24,14 +24,14 @@ export const SketelonPrincipalInfo = () => {
    return (
       <>
          <div className='animate-pulse flex flex-col gap-1'>
-            <div className='h-8 bg-slate-300 w-2/3 mx-auto rounded-md'></div>
-            <div className='h-14 bg-slate-300 w-1/4 mx-auto rounded-md'></div>
+            <div className='h-8 bg-slate-300 w-2/3 mx-auto rounded-md glassmorphism'></div>
+            <div className='h-14 bg-slate-300 w-1/4 mx-auto rounded-md glassmorphism'></div>
          </div>
          <div className='mt-1'>
-            <div className='h-6 bg-slate-300 w-1/5 mx-auto rounded-sm'></div>
+            <div className='h-6 bg-slate-300 w-1/5 mx-auto rounded-sm glassmorphism'></div>
             <div className='flex gap-2 justify-center mt-1'>
-               <div className='h-4 bg-slate-300 w-1/6 rounded-sm'></div>
-               <div className='h-4 bg-slate-300 w-1/6 rounded-sm'></div>
+               <div className='h-4 bg-slate-300 w-1/6 rounded-sm glassmorphism'></div>
+               <div className='h-4 bg-slate-300 w-1/6 rounded-sm glassmorphism'></div>
             </div>
          </div>
       </>
