@@ -1,5 +1,5 @@
 import React from 'react'
-import InfoCard from './InfoCard'
+import InfoCard, { SkeletonCard } from './InfoCard'
 
 const CardsList = ({ data }) => {
    const {
@@ -66,6 +66,20 @@ const CardsList = ({ data }) => {
             extraInfo={'idK'}
          />
          <InfoCard title='PRESSURE' info={data.main.pressure} />
+      </div>
+   )
+}
+
+// Skeleton laod
+export const SkeletonCardsList = () => {
+   return (
+      <div className='flex flex-wrap justify-center gap-2 mt-12 animate-pulse'>
+         <SkeletonCard />
+         <SkeletonCard />
+         <SkeletonCard />
+         <SkeletonCard />
+         <SkeletonCard />
+         <SkeletonCard />
       </div>
    )
 }
