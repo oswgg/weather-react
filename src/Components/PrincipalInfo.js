@@ -1,7 +1,7 @@
 // Info
 const PrincipalInfo = ({ data }) => {
    return (
-      <div className='w-3/4 h-[25vh] mx-auto text-center flex flex-col justify-center'>
+      <div className='w-3/4 h-[20vh] mx-auto text-center flex flex-col justify-center'>
          <div>
             <p className='text-2xl'>{data.name}</p>
             <p className='text-5xl font-extralight'>

@@ -17,13 +17,18 @@ const rulesForStyles = {
    use: ['style-loader', 'css-loader', 'postcss-loader'],
 }
 
+const rulesForImages = {
+   test: /\.(png|jp(e*)g|svg|gif)$/,
+   type: 'asset/resource',
+}
+
 module.exports = {
    entry: path.join(__dirname, 'src', 'index.js'),
    output: {
       path: path.resolve(__dirname, 'public'),
    },
    module: {
-      rules: [rulesForJavaScript, rulesForStyles],
+      rules: [rulesForJavaScript, rulesForStyles, rulesForImages],
    },
    plugins: [
       new HtmlWebpackPlugin({
@@ -33,5 +38,5 @@ module.exports = {
    devServer: {
       open: true,
       port: 8080,
-   }
+   },
 }

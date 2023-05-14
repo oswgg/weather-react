@@ -84,7 +84,7 @@ const CurrentCity = () => {
       // if data and loading are are in common then show the info if not show skeleton load
       <>
          {data && !loading ? (
-            <div className='w-11/12 mx-auto pt-12 '>
+            <div className='w-11/12 mx-auto pt-4 '>
                <CityForm changeSearch={changeSearch} />
                <PrincipalInfo data={data} isLoading={loading} />
                <CardsList data={data} />
