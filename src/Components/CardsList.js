@@ -1,10 +1,8 @@
 import InfoCard, { SkeletonCard } from './InfoCard'
 
 const CardsList = ({ data }) => {
-   const {
-      sys: { sunrise, sunset },
-      timezone,
-   } = data
+   const { sys, timezone } = data
+   const { sunrise, sunset } = sys
 
    // Get the real time of the city
    const getTime = unix => {

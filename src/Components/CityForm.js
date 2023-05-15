@@ -8,19 +8,22 @@ const CityForm = ({ changeSearch }) => {
 
    const handleOnSubmit = evt => {
       evt.preventDefault()
+      evt.target[0].value = ''
       changeSearch(city)
    }
 
    const handleOnChange = ({ target }) => setCity(target.value)
 
-   const handleOnClick = () => {
+   const handleOnClick = evt => {
       setVisible(!visible)
+      evt.target.nextSibling.children[0].value = ''
+
+      if (visible) changeSearch(city)
    }
 
    useEffect(() => {
       const className = visible ? 'opacity-100' : 'opacity-0'
       setClassname(className)
-      if (visible) changeSearch(city)
    }, [visible])
 
    return (
@@ -33,7 +36,7 @@ const CityForm = ({ changeSearch }) => {
                type='text'
                placeholder='Search for a city'
                onChange={handleOnChange}
-               className='bg-sky-300 p-2 rounded-md glassmorphism text-center placeholder-white w-full'
+               className='bg-sky-300 p-2 rounded-md glassmorphism text-center placeholder-black w-full'
             />
          </form>
       </div>
