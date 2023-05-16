@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { helpHttp } from '../Helpers/helpHttp'
 
 const firstLocation = {}
+const initialError = {}
 
 const api = helpHttp()
 
@@ -10,8 +11,9 @@ const useData = () => {
    const [data, setData] = useState(null)
    const [loading, setLoading] = useState(false)
    const [search, setSearch] = useState(null)
-   const [error, setError] = useState({})
+   const [errorObj, setErrorObj] = useState(initialError)
 
+   // Use geolocation when app loads
    useEffect(() => {
       const success = position => {
          const { coords } = position
@@ -34,6 +36,7 @@ const useData = () => {
       navigator.geolocation.getCurrentPosition(success, error)
    }, [])
 
+   // Load weather of the city where the user is
    useEffect(() => {
       const { latitude, longitude } = location
 
@@ -46,9 +49,9 @@ const useData = () => {
       })
    }, [location])
 
+   // searching for another city
    useEffect(() => {
       if (!search) return
-      setLoading(true) // skeleton load
 
       api.getBySearch(search)
          .then(data => {
@@ -58,16 +61,20 @@ const useData = () => {
             setLoading(false) // skeleton load false
          })
          .catch(err => {
-            setError({
-               ...error,
+            setErrorObj({
+               ...errorObj,
                error: true,
                message: err.message,
             })
+
+            setTimeout(() => {
+               setErrorObj(initialError)
+            }, 1500)
             setLoading(false)
          }) // manage of error
    }, [search])
 
-   return { data, loading, error, setSearch }
+   return { data, loading, errorObj, setSearch, search }
 }
 
 export default useData

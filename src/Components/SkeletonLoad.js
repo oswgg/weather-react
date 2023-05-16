@@ -3,7 +3,7 @@ import { SketelonPrincipalInfo } from './PrincipalInfo'
 
 const SkeletonLoad = () => {
    return (
-      <div className='w-11/12 mx-auto pt-16'>
+      <div className='pt-6'>
          <SketelonPrincipalInfo />
          <SkeletonCardsList />
       </div>

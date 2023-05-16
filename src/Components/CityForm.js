@@ -10,6 +10,7 @@ const CityForm = ({ changeSearch }) => {
       evt.preventDefault()
       evt.target[0].value = ''
       changeSearch(city)
+      setVisible(false)
    }
 
    const handleOnChange = ({ target }) => setCity(target.value)

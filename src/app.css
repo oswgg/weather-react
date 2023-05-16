@@ -4,5 +4,11 @@
 
 .glassmorphism {
    background: rgba(0, 0, 100, 0.08);
-   backdrop-filter: blur(100px);
+   border: 1px solid rgba(255, 255, 255, 0.15);
+   backdrop-filter: blur(18px);
+}
+
+.error {
+   background: rgba(255, 0, 0, 0.12);
+   border: 1px solid rgba(255, 0, 0, 0.15);
 }
