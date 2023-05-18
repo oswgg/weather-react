@@ -1,14 +1,16 @@
 import InfoCard, { SkeletonCard } from './InfoCard'
+import WindCompass from './WindCompass'
 
 const CardsList = ({ data }) => {
-   const { sys, timezone } = data
+   const { sys, timezone, wind } = data
    const { sunrise, sunset } = sys
+   const { speed, deg } = wind
 
    // Get the real time of the city
    const getTime = unix => {
       const date = new Date(unix * 1000 + timezone * 1000)
 
-      const hours = (date.getUTCHours() + 24) % 24
+      const hours = date.getUTCHours()
 
       const minutes = date.getMinutes().toString().padStart(2, '0')
 
@@ -25,6 +27,15 @@ const CardsList = ({ data }) => {
 
       return 'Wind is making it feel colder'
    }
+
+   const convertWind = speed => `${Math.round((speed * 3600) / 1000)} km/h`
+   const convertVisibilty = distance => `${Math.round(distance / 1000)} km`
+
+   const windInfo = {
+      speed: convertWind(speed),
+      direction: deg,
+   }
+
    return (
       <div className='flex flex-wrap justify-center gap-2 mt-6 '>
          <InfoCard
@@ -37,14 +48,12 @@ const CardsList = ({ data }) => {
             info={`${Math.round(data.main.feels_like)}°`}
             extraInfo={compareTemp()}
          />
-         <InfoCard
-            title='WIND'
-            info={`${Math.round((data.wind.speed * 3600) / 1000)} km/h`}
-            extraInfo={`Sunset: ${getTime(data.sys.sunset)}`}
-         />
+         <InfoCard title='WIND'>
+            <WindCompass info={windInfo} />
+         </InfoCard>
          <InfoCard
             title='VISIBILTY'
-            info={`${Math.round(data.visibility / 1000)} km`}
+            info={convertVisibilty(data.visibility)}
             extraInfo={'It´s clear right now'}
          />
          <InfoCard

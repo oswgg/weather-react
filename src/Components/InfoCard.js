@@ -3,12 +3,14 @@ import HeaderCardText from './HeaderCardText'
 import ExtraInfoCard from './ExtraInfoCard'
 
 // Info
-const InfoCard = ({ title, info, extraInfo }) => {
+const InfoCard = props => {
+   const { title, info, extraInfo, children } = props
    return (
       <div className='relative h-40 w-[48%] flex-grow bg-slate-400 glassmorphism rounded-lg p-4'>
          <CardTitle>{title}</CardTitle>
          <HeaderCardText>{info}</HeaderCardText>
          <ExtraInfoCard>{extraInfo}</ExtraInfoCard>
+         {children}
       </div>
    )
 }
