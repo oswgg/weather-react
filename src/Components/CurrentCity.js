@@ -8,7 +8,12 @@ const CurrentCity = () => {
    const { data, loading, errorObj, setSearch, search } = useData()
    const { error, message } = errorObj
 
-   const changeSearch = city => setSearch(city || null) //    Change the name of the city search
+   const changeSearch = city => {
+      setSearch(city || null)
+      setTimeout(() => {
+         setSearch(null)
+      }, 1600)
+   } //    Change the name of the city search
 
    return (
       // if data and loading are are in common then show the info if not show skeleton load

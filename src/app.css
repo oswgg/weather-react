@@ -40,8 +40,32 @@
    right: -10%;
 }
 
+.wind-compass {
+   @apply -z-50 w-[110px] h-[110px] border-[2px] border-dashed border-blue-400 mx-auto rounded-full -translate-y-[10%];
+}
+
+.wind-letter {
+   @apply absolute w-5 h-5 flex items-center justify-center text-white font-bold text-sm;
+}
+
+.N {
+   @apply left-1/2 -translate-x-1/2 -top-[10%];
+}
+
+.S {
+   @apply left-1/2 -translate-x-1/2 -bottom-[10%];
+}
+
+.W {
+   @apply top-1/2 -translate-y-1/2 -left-[10%];
+}
+
+.E {
+   @apply top-1/2 -translate-y-1/2 -right-[10%];
+}
+
 .wind-speed {
-   @apply absolute w-3/5 h-3/5 rounded-full text-center text-[15px] z-10;
+   @apply absolute w-3/5 h-3/5 rounded-full text-center text-[15px] z-10 pt-[5%];
 }
 
 .wind-speed::after {

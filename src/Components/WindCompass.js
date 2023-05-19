@@ -2,12 +2,19 @@ const WindCompass = ({ info }) => {
    const deg = info.direction - 90
 
    return (
-      <div className='-z-50 w-[110px] h-[110px] border-[3px] border-dashed border-blue-400 mx-auto rounded-full'>
+      <div className='wind-compass'>
+         <span className='wind-letter S'>S</span>
+         <span className='wind-letter N'>N</span>
+         <span className='wind-letter W'>W</span>
+         <span className='wind-letter E'>E</span>
          <div className='relative h-full w-full grid place-items-center'>
             <div
                className='wind'
                style={{ transform: `rotate(${deg}deg)` }}></div>
-            <div className='wind-speed'>{info.speed}</div>
+            <div className='wind-speed'>
+               <p>{info.speed}</p>
+               <p>km/h</p>
+            </div>
          </div>
       </div>
    )

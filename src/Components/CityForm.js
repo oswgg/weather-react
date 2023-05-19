@@ -4,7 +4,7 @@ import search from '../Assets/bx-search.svg'
 const CityForm = ({ changeSearch }) => {
    const [city, setCity] = useState(null)
    const [visible, setVisible] = useState(false)
-   const [classname, setClassname] = useState('opacity-0')
+   const [classname, setClassname] = useState('translate-y-[-100%] hidden')
 
    const handleOnSubmit = evt => {
       evt.preventDefault()
@@ -18,12 +18,15 @@ const CityForm = ({ changeSearch }) => {
    const handleOnClick = evt => {
       setVisible(!visible)
       evt.target.nextSibling.children[0].value = ''
+      evt.target.nextSibling.children[0].focus()
 
       if (visible) changeSearch(city)
    }
 
    useEffect(() => {
-      const className = visible ? 'opacity-100' : 'opacity-0'
+      const className = visible
+         ? 'opacity-100'
+         : 'translate-y-[-100%] opacity-0'
       setClassname(className)
    }, [visible])
 
@@ -32,7 +35,7 @@ const CityForm = ({ changeSearch }) => {
          <img src={search} className='' onClick={handleOnClick} />
          <form
             onSubmit={handleOnSubmit}
-            className={` top-10 transition-all duration-50 flex-grow ${classname}`}>
+            className={` top-10 transition-all duration-50 flex-grow ${classname} `}>
             <input
                type='text'
                placeholder='Search for a city'

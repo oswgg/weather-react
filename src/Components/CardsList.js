@@ -28,7 +28,7 @@ const CardsList = ({ data }) => {
       return 'Wind is making it feel colder'
    }
 
-   const convertWind = speed => `${Math.round((speed * 3600) / 1000)} km/h`
+   const convertWind = speed => Math.round((speed * 3600) / 1000)
    const convertVisibilty = distance => `${Math.round(distance / 1000)} km`
 
    const windInfo = {

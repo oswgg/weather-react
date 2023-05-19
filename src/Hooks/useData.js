@@ -70,7 +70,6 @@ const useData = () => {
             setTimeout(() => {
                setErrorObj(initialError)
             }, 1500)
-            setLoading(false)
          }) // manage of error
    }, [search])
 
