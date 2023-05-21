@@ -37,7 +37,7 @@ const CardsList = ({ data }) => {
    }
 
    return (
-      <div className='flex flex-wrap justify-center gap-2 mt-6 '>
+      <div className='flex flex-wrap justify-center gap-2 mt-6 max-w-2xl md:mx-auto'>
          <InfoCard
             title='SUNRISE'
             info={getTime(sunrise)}

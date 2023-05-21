@@ -5,7 +5,7 @@
 .glassmorphism {
    background: rgba(0, 0, 100, 0.08);
    border: 1px solid rgba(255, 255, 255, 0.15);
-   backdrop-filter: blur(18px);
+   backdrop-filter: blur(20px);
 }
 
 .error {
@@ -14,17 +14,17 @@
 }
 
 .wind {
-   @apply absolute w-full h-[2px] bg-white relative transition-all duration-[1.2s];
+   @apply absolute w-[100%] h-[2px] bg-[rgba(255,255,255,0.3)] relative transition-all duration-[1.2s];
    animation: move-wind cubic-bezier(0.5, 2, 1.34);
 }
 
 .wind::after {
    content: '';
    position: absolute;
-   width: 10px;
-   height: 10px;
+   width: 8px;
+   height: 8px;
    background-color: white;
-   top: -200%;
+   top: -150%;
    right: 100%;
    clip-path: polygon(0 50%, 100% 100%, 100% 0);
 }
@@ -32,16 +32,36 @@
 .wind::before {
    content: '';
    position: absolute;
-   width: 10px;
-   height: 10px;
+   width: 8px;
+   height: 8px;
    border: 2px solid white;
    border-radius: 50%;
-   top: -200%;
+   top: -150%;
    right: -10%;
 }
 
+.morning {
+   @apply bg-gradient-to-t from-orange-200 from-[-20%] to-sky-300;
+}
+
+.noon {
+   @apply bg-gradient-to-t from-white from-[-60%] via-sky-300 to-yellow-300 to-[160%];
+}
+
+.afternoon {
+   @apply bg-gradient-to-t from-white from-[-60%] via-sky-300 to-yellow-300 to-[160%];
+}
+
+.evening {
+   @apply bg-gradient-to-t from-[#3a1c71] from-[15%] via-[#d76d77] via-70% to-[#ffaf7b] text-white;
+}
+
+.night {
+   @apply bg-gradient-to-t from-[#283E51] to-[#283E51] text-[rgba(255,255,255,0.85)];
+}
+
 .wind-compass {
-   @apply -z-50 w-[110px] h-[110px] border-[2px] border-dashed border-blue-400 mx-auto rounded-full -translate-y-[10%];
+   @apply -z-50 w-[110px] h-[110px] border-[2px] border-dashed glassmorphism mx-auto rounded-full -translate-y-[10%];
 }
 
 .wind-letter {
@@ -69,6 +89,6 @@
 }
 
 .wind-speed::after {
-   @apply absolute top-0 left-0 w-full h-full bg-sky-300 rounded-full -z-10;
+   @apply absolute top-0 left-0 w-full h-full rounded-full -z-10 glassmorphism;
    content: '';
 }

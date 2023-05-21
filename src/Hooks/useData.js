@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { helpHttp } from '../Helpers/helpHttp'
+import { CityTimeContext } from '../Context/CityTimeContext'
 
 const firstLocation = {}
 const initialError = {}
@@ -12,6 +13,7 @@ const useData = () => {
    const [loading, setLoading] = useState(false)
    const [search, setSearch] = useState(null)
    const [errorObj, setErrorObj] = useState(initialError)
+   const { changeTime } = useContext(CityTimeContext) // what time is in the city context
 
    // Use geolocation when app loads
    useEffect(() => {
@@ -44,6 +46,7 @@ const useData = () => {
       setLoading(true) // skeleton load
 
       api.getByLocation(latitude, longitude).then(data => {
+         changeTime(data.timezone) // time city context
          setData(data)
          setLoading(false) // skeleton load false
       })
@@ -57,6 +60,7 @@ const useData = () => {
          .then(data => {
             if (data.error) return Promise.reject(data)
 
+            changeTime(data.timezone) // time city context
             setData(data)
             setLoading(false) // skeleton load false
          })
