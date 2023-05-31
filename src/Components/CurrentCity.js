@@ -5,13 +5,13 @@ import CityWeatherInfo from './CityWeatherInfo'
 import ErrorMessage from './ErrorMessage'
 
 const CurrentCity = () => {
-   const { data, loading, errorObj, setSearch, search } = useData()
+   const { data, loading, errorObj, searchCity, search } = useData()
    const { error, message } = errorObj
 
    const changeSearch = city => {
-      setSearch(city || null)
+      searchCity(city || null)
       setTimeout(() => {
-         setSearch(null)
+         searchCity(null)
       }, 1600)
    } //    Change the name of the city search
 

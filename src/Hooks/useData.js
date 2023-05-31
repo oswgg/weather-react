@@ -2,13 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import { helpHttp } from '../Helpers/helpHttp'
 import { CityTimeContext } from '../Context/CityTimeContext'
 
-const firstLocation = {}
 const initialError = {}
 
 const api = helpHttp()
 
 const useData = () => {
-   const [location, setLocation] = useState(firstLocation)
    const [data, setData] = useState(null)
    const [loading, setLoading] = useState(false)
    const [search, setSearch] = useState(null)
@@ -21,10 +19,12 @@ const useData = () => {
          const { coords } = position
          const { latitude, longitude } = coords
 
-         setLocation({
+         const location = {
             latitude,
             longitude,
-         })
+         }
+
+         searchLocation(location)
       }
 
       const error = () => {
@@ -39,7 +39,7 @@ const useData = () => {
    }, [])
 
    // Load weather of the city where the user is
-   useEffect(() => {
+   const searchLocation = location => {
       const { latitude, longitude } = location
 
       if (!latitude || !longitude) return
@@ -50,13 +50,14 @@ const useData = () => {
          setData(data)
          setLoading(false) // skeleton load false
       })
-   }, [location])
+   }
 
    // searching for another city
-   useEffect(() => {
-      if (!search) return
+   const searchCity = city => {
+      setSearch(city)
+      if (!city) return
 
-      api.getBySearch(search)
+      api.getBySearch(city)
          .then(data => {
             if (data.error) return Promise.reject(data)
 
@@ -75,9 +76,9 @@ const useData = () => {
                setErrorObj(initialError)
             }, 1500)
          }) // manage of error
-   }, [search])
+   }
 
-   return { data, loading, errorObj, setSearch, search }
+   return { data, loading, errorObj, searchCity, search }
 }
 
 export default useData
