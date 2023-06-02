@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import search from '../Assets/bx-search.svg'
 
 const CityForm = ({ changeSearch }) => {
    const [city, setCity] = useState(null)
    const [visible, setVisible] = useState(false)
    const [classname, setClassname] = useState('translate-y-[-100%] hidden')
+
+   const inputRef = useRef()
 
    const handleOnSubmit = evt => {
       evt.preventDefault()
@@ -15,10 +17,10 @@ const CityForm = ({ changeSearch }) => {
 
    const handleOnChange = ({ target }) => setCity(target.value)
 
-   const handleOnClick = evt => {
+   const handleOnClick = () => {
       setVisible(!visible)
-      evt.target.nextSibling.children[0].value = ''
-      evt.target.nextSibling.children[0].focus()
+      inputRef.current.value = ''
+      inputRef.current.focus()
 
       if (visible) changeSearch(city)
    }
@@ -37,6 +39,7 @@ const CityForm = ({ changeSearch }) => {
             onSubmit={handleOnSubmit}
             className={` top-10 transition-all duration-50 flex-grow ${classname} `}>
             <input
+               ref={inputRef}
                type='text'
                placeholder='Search for a city'
                onChange={handleOnChange}

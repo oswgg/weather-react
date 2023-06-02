@@ -7,7 +7,6 @@ const App = () => {
    const { time } = useContext(CityTimeContext)
 
    useEffect(() => {
-      console.log(time)
       if (time > 20 || time == 0 || time < 7) setClassname('night')
       else if (time < 12) setClassname('morning')
       else if (time == 12) setClassname('noon')
