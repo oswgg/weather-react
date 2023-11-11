@@ -10,7 +10,7 @@ const CityForm = ({ changeSearch }) => {
 
    const handleOnSubmit = evt => {
       evt.preventDefault()
-      evt.target[0].value = ''
+      inputRef.current.value = ''
       changeSearch(city)
       setVisible(false)
    }
